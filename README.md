@@ -92,3 +92,4 @@ The pipelines are configured in .github/workflows folder:
 - Add a helm chart to deploy the application
 - Build a lightweight docker image
 - Add a e2e test in the pipeline raising a kind cluster and running the script
+- Add shellcheck and linters to the pipeline

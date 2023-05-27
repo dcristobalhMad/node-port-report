@@ -3,6 +3,10 @@ import subprocess
 import yaml
 import boto3
 import datetime
+import smtplib
+import os
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 config.load_incluster_config()
 
@@ -53,32 +57,59 @@ def check_ports_on_nodes():
 
     return results
 
-# Run the port checking process
-results = check_ports_on_nodes()
-
-# Generate filename with today's date
-today = datetime.datetime.now().strftime('%Y-%m-%d')
-filename = f"opened_ports_{today}.txt"
-
-# Write results to a file
-with open(filename, 'w') as file:
-    for node_name, opened_ports in results.items():
-        file.write(f"{node_name}: {opened_ports}\n")
-
-print("Results saved to opened_ports.txt file.")
-
-# Upload file to S3 bucket
-def upload_to_s3(file_path, bucket_name, object_key):
-    s3_client = boto3.client('s3')
-    s3_client.upload_file(file_path, bucket_name, object_key)
-
-# Specify your S3 bucket details
-s3_bucket_name = 's3-report-bucket-diego'
-s3_object_key = filename
-
-# Upload the file to S3 bucket
 try:
+
+    # Run the port checking process
+    results = check_ports_on_nodes()
+
+    # Generate filename with today's date
+    today = datetime.datetime.now().strftime('%Y-%m-%d')
+    filename = f"opened_ports_{today}.txt"
+
+    # Write results to a file
+    with open(filename, 'w') as file:
+        for node_name, opened_ports in results.items():
+            file.write(f"{node_name}: {opened_ports}\n")
+
+    print("Results saved to opened_ports file.")
+
+    # Upload file to S3 bucket
+    def upload_to_s3(file_path, bucket_name, object_key):
+        s3_client = boto3.client('s3')
+        s3_client.upload_file(file_path, bucket_name, object_key)
+
+    # Specify your S3 bucket details
+    s3_bucket_name = 's3-report-bucket-diego'
+    s3_object_key = filename
+
+
     upload_to_s3(filename, s3_bucket_name, s3_object_key)
     print("File uploaded to S3 successfully.")
+    raise ValueError('A very specific bad thing happened.')
+
 except Exception as e:
-    print(f"Error uploading file to S3: {str(e)}")
+    error_message = f"Error occurred while running the script: {str(e)}"
+
+    # Email configuration
+    smtp_server = 'smtp.gmail.com'
+    smtp_port = 587
+    sender_email = 'alertsender2023@gmail.com'
+    receiver_email = 'diecristher@gmail.com'
+    email_subject = 'Script Execution Failed'
+
+    # Create the email message
+    message = MIMEMultipart()
+    message['From'] = sender_email
+    message['To'] = receiver_email
+    message['Subject'] = email_subject
+    amazing_password = os.environ.get('MAIL_PASSWORD')
+    # Attach error message to the email
+    message.attach(MIMEText(error_message, 'plain'))
+
+    # Connect to SMTP server and send the email
+    with smtplib.SMTP(smtp_server, smtp_port) as server:
+        server.starttls()
+        server.login(sender_email, amazing_password)
+        server.send_message(message)
+
+    print(f"Error occurred while running the script. Email notification sent.")

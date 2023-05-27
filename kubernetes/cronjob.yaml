@@ -11,5 +11,5 @@ spec:
           serviceAccountName: s3-access
           containers:
             - name: diego-container
-              image: dcristobal/node-get-open-ports:latest
+              image: dcristobal/node-get-open-ports:0.0.2
           restartPolicy: OnFailure
