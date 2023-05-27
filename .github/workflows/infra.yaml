@@ -27,15 +27,16 @@ jobs:
     defaults:
       run:
         shell: bash
-        # We keep Terraform files in the terraform directory.
-        working-directory: ./terraform
+        # We keep Terraform files in the infra directory.
+        working-directory: ./infra
 
     steps:
       - name: Checkout the repository to the runner
         uses: actions/checkout@v3
 
       - name: Run bash script to create s3 bucket
-        run: bash .github/s3_creation.sh
+        run: bash s3_creation.sh
+        working-directory: .github
 
       - name: Setup Terraform with specified version on the runner
         uses: hashicorp/setup-terraform@v2
