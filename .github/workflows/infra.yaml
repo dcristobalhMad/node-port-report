@@ -13,8 +13,6 @@ on:
       - infra/**
 
 env:
-  # verbosity setting for Terraform logs
-  TF_LOG: INFO
   # Credentials for deployment to AWS
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -22,7 +20,7 @@ env:
 
 jobs:
   terraform:
-    name: "Terraform Infrastructure Change Management"
+    name: "Terraform Infrastructure"
     runs-on: ubuntu-latest
     defaults:
       run:
