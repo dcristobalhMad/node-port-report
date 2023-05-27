@@ -19,6 +19,12 @@ If you want to run the code locally you will need:
 
 The infrastructure is composed by a Kubernetes cluster in AWS with 2 managed node groups and an S3 bucket to push/pull the daily report. All will be created by Terraform and automated by github actions when push to master branch but you can also run it manually with the following steps:
 
+- To check all Makefile commands you can run:
+
+```bash
+make help
+```
+
 - Create a S3 bucket to store the Terraform state
 
 ```bash
@@ -37,8 +43,8 @@ make tf-plan
 make tf-deploy
 ```
 
-To check all Makefile commands you can run:
+- Get the kubeconfig file
 
 ```bash
-make help
+make kubeconfig
 ```
