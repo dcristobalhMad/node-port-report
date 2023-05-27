@@ -1,11 +1,12 @@
 SHELL := /bin/bash
 
-.PHONY: help s3-creation tf-check tf-init tf-plan tf-deploy tf-destroy kubeconfig
-.SILENT: help s3-creation tf-check tf-init tf-plan tf-deploy tf-destroy kubeconfig
+.PHONY: help tf-fmt s3-creation tf-check tf-init tf-plan tf-deploy tf-destroy kubeconfig
+.SILENT: help tf-fmt s3-creation tf-check tf-init tf-plan tf-deploy tf-destroy kubeconfig
 
 help:
 	echo "s3-creation: Create S3 bucket for terraform state"
 	echo "tf-check: Check terraform files"
+	echo "tf-fmt: Format terraform files"
 	echo "tf-init: Initialize terraform"
 	echo "tf-plan: Create terraform plan"
 	echo "tf-deploy: Deploy terraform plan"
@@ -14,6 +15,9 @@ help:
 
 s3-creation:
 	bash .github/s3_creation.sh
+
+tf-fmt:
+	cd infra && terraform fmt
 
 tf-check:
 	cd infra && terraform fmt -check

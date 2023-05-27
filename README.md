@@ -36,3 +36,9 @@ make tf-plan
 ```bash
 make tf-deploy
 ```
+
+To check all Makefile commands you can run:
+
+```bash
+make help
+```
