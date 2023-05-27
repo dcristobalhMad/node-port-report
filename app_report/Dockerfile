@@ -1,6 +1,10 @@
 # Use a base image with Python runtime
 FROM python:3.9
 
+# Update the package lists and install netcat
+RUN apt-get update && \
+    apt-get install -y netcat
+
 # Set the working directory in the container
 WORKDIR /app
 

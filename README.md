@@ -5,12 +5,14 @@
 Periodic report of all the Kubernetes nodes opened ports, with an easy-to-parse output, similar to:
 
 Node1: [22,80,443]
+Node2: [22,443]
 Master1: [22,443]
 
 ## Requirements
 
 If you want to run the code locally you will need:
 
+- Set the environment variables AWS_DEFAULT_REGION, AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
 - aws credentials configured
 - awscli
 - terraform
@@ -48,3 +50,29 @@ make tf-deploy
 ```bash
 make kubeconfig
 ```
+
+## Application
+
+In app_report folder there are 4 files:
+
+- Dockerfile: to build the docker image
+- check_ports.py: the python script to check the opened ports
+- requirements.txt: the python dependencies
+- whitelist.txt: the whitelist of ports to ignore
+
+The script will check the opened ports in all the nodes and will generate a report in the following format:
+
+```bash
+Node1: [22,80,443]
+Node2: [22,443]
+Master1: [22,443]
+```
+
+In kubernetes folder there are 4 files:
+
+* cronjob.yaml: the cronjob to run the script every day at 00:00
+* rbac.yaml: the role and rolebinding to allow the cronjob to have permissions to run the script for getting node information
+* serviceaccount.yaml: the service account for the cronjob with the aws role attached
+* kustomization.yaml: the kustomization file to deploy all the previous files
+
+

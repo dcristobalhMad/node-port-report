@@ -3,6 +3,11 @@ SHELL := /bin/bash
 .PHONY: help tf-fmt s3-creation tf-check tf-init tf-plan tf-deploy tf-destroy kubeconfig
 .SILENT: help tf-fmt s3-creation tf-check tf-init tf-plan tf-deploy tf-destroy kubeconfig
 
+DOCKER_USER =? dcristobal
+DOCKER_APP_NAME =? node-get-open-ports
+DOCKER_APP_VERSION =? latest
+
+
 help:
 	echo "s3-creation: Create S3 bucket for terraform state"
 	echo "tf-check: Check terraform files"
@@ -36,3 +41,9 @@ tf-destroy:
 
 kubeconfig:
 	bash .github/get_kubeconfig.sh
+
+build-app:
+	docker build -t dcristobal/node-get-open-ports:latest ./app_report/
+
+push-app:
+	docker push dcristobal/node-get-open-ports:latest
