@@ -71,5 +71,5 @@ module "eks" {
 }
 
 resource "aws_s3_bucket" "s3_report_bucket" {
-  bucket = "s3_report_bucket"
+  bucket = "s3-report-bucket-diego"
 }
