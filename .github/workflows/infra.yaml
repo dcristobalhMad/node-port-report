@@ -32,7 +32,7 @@ jobs:
 
     steps:
       - name: Checkout the repository to the runner
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Run bash script to create s3 bucket
         run: bash .github/s3_creation.sh
