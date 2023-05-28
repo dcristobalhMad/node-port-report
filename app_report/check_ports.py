@@ -85,7 +85,6 @@ try:
 
     upload_to_s3(filename, s3_bucket_name, s3_object_key)
     print("File uploaded to S3 successfully.")
-    raise ValueError('A very specific bad thing happened.')
 
 except Exception as e:
     error_message = f"Error occurred while running the script: {str(e)}"
