@@ -102,10 +102,25 @@ It will download the report with the current day from the S3 bucket and leave it
 
 ## Pipelines
 
+### Github actions
+
 The pipelines are configured in .github/workflows folder:
 
 - infra.yml: to deploy the terraform infrastructure from every push to master branch
 - app-build.yml: to build and to deploy the application from a tag in semver format
+
+### Secrets
+
+The secrets should be configured in github repository settings with the following names:
+
+- AWS_ACCESS_KEY_ID
+- AWS_DEFAULT_REGION
+- AWS_SECRET_ACCESS_KEY
+- DOCKER_PASSWORD
+- DOCKER_USERNAME
+- MAIL_PASSWORD
+- MAIL_SENDER
+- PAT_TAG
 
 ## Improvements
 
