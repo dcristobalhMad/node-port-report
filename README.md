@@ -22,13 +22,14 @@ The report should be generated daily and stored in a S3 bucket. I assume that I 
 
 If you want to run the code locally you will need:
 
-- Set the environment variables AWS_DEFAULT_REGION, AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY, MAIL_PASSWORD, MAIL_USER
+- Set the environment variables AWS_DEFAULT_REGION, AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY, MAIL_PASSWORD, MAIL_USER, FILENAME, BUCKET_NAME
 - AWS credentials configured
 - awscli
 - Terraform
 - Python
 - Golang
 - Kubectl
+- Replace this function in the python code config.load_incluster_config() by config.load_kube_config() to run it locally
 
 ## Infrastructure
 

@@ -16,4 +16,6 @@ spec:
               env:
                 - name: BUCKET_NAME
                   value: "s3-report-bucket-diego"
+                - name: FILENAME
+                  value: "opened_ports"
           restartPolicy: OnFailure

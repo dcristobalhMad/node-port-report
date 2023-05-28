@@ -64,7 +64,8 @@ try:
 
     # Generate filename with today's date
     today = datetime.datetime.now().strftime('%Y-%m-%d')
-    filename = f"opened_ports_{today}.txt"
+    env_name = os.environ.get('FILENAME')
+    filename = f"{env_name}_{today}.txt"
 
     # Write results to a file
     with open(filename, 'w') as file:
