@@ -83,7 +83,7 @@ Master1: [22,443]
 
 In kubernetes folder there are 4 files:
 
-- cronjob.yaml: the cronjob to run the script every day at 00:00
+- cronjob.yaml: the cronjob to run the script every day at 00:00. You could populate the name of the specific bucket in env variables inside the cronjob
 - rbac.yaml: the role and rolebinding to allow the cronjob to have permissions to run the script for getting node information
 - serviceaccount.yaml: the service account for the cronjob with the aws role attached
 - kustomization.yaml: the kustomization file to deploy all the previous files
@@ -106,8 +106,8 @@ It will download the report with the current day from the S3 bucket and leave it
 
 The pipelines are configured in .github/workflows folder:
 
-- infra.yml: to deploy the terraform infrastructure from every push to master branch
-- app-build.yml: to build and to deploy the application from a tag in semver format
+- infra.yaml: to deploy the terraform infrastructure from every push to master branch
+- app-build.yaml: to build and to deploy the application from a tag in semver format
 
 ### Secrets
 
@@ -124,8 +124,6 @@ The secrets should be configured in github repository settings with the followin
 
 ## Improvements
 
-- Automate the deployment python script tag image version with another script
-- Variables in cronjob to configure the s3 bucket and the report name dinamically
 - Add gitops paradigm to deploy the manifests and update the image tags
 - Add a helm chart to deploy the application
 - Build a lightweight docker image

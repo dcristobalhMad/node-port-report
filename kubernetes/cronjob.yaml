@@ -13,4 +13,7 @@ spec:
             - name: diego-container
               image: dcristobal/node-get-open-ports:0.0.6
               imagePullPolicy: Always
+              env:
+                - name: BUCKET_NAME
+                  value: "s3-report-bucket-diego"
           restartPolicy: OnFailure
