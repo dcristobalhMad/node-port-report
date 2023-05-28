@@ -53,11 +53,14 @@ jobs:
       - name: Install kubectl
         run: curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
 
+      - name: Determine tag
+        run: 'echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV'
+
+      - name: Set image tag to cronjob manifest
+        run: 'sed -i "s|image: dcristobal/node-get-open-ports:.*|image: dcristobal/node-get-open-ports:${{ env.RELEASE_TAG }}|g" kubernetes/cronjob.yaml'
+
       - name: Deploy to Kubernetes
         run: kubectl apply -k kubernetes/
-
-      - name: "Determine tag"
-        run: 'echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV'
 
       - name: "Create release"
         uses: "actions/github-script@v5"

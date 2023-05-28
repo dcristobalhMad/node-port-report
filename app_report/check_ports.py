@@ -79,7 +79,7 @@ try:
         s3_client.upload_file(file_path, bucket_name, object_key)
 
     # Specify your S3 bucket details
-    s3_bucket_name = 's3-report-bucket-diego'
+    s3_bucket_name = os.environ.get('BUCKET_NAME')
     s3_object_key = filename
 
 
