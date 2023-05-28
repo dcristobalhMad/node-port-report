@@ -23,5 +23,5 @@ data "aws_iam_policy_document" "trust" {
 
 resource "aws_iam_role_policy_attachment" "bucket_policy_attachment" {
   role       = aws_iam_role.bucket_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"  # Replace with the desired bucket policy ARN
+  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess" # Replace with the desired bucket policy ARN
 }
