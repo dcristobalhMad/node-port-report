@@ -10,6 +10,8 @@ Master1: [22,443]
 
 ## Solution
 
+![Arch_diagram](images/infra_diagram.png)
+
 The report should be generated daily and stored in a S3 bucket. I assume that I will need two apps, one to generate the report and another to fetch it.
 
 - To generate the report I have decided to use python and a cronjob in kubernetes to run it every day at 00:00. The report will be stored in a S3 bucket. The python script will check the opened ports in all the nodes and will generate a report, it will parse a whitelist of ports to ignore selected by the user and will push the report to the S3 bucket. Apart from that, the python script will send an email to the user if the script fails.
@@ -21,7 +23,7 @@ The report should be generated daily and stored in a S3 bucket. I assume that I 
 If you want to run the code locally you will need:
 
 - Set the environment variables AWS_DEFAULT_REGION, AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY, MAIL_PASSWORD, MAIL_USER
-- Aws credentials configured
+- AWS credentials configured
 - awscli
 - Terraform
 - Python
