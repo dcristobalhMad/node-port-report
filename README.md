@@ -83,7 +83,7 @@ Master1: [22,443]
 
 In kubernetes folder there are 4 files:
 
-- cronjob.yaml: the cronjob to run the script every day at 00:00. You could the name of the specific bucket in env variables inside the cronjob
+- cronjob.yaml: the cronjob to run the script every day at 00:00. You could populate the name of the specific bucket in env variables inside the cronjob
 - rbac.yaml: the role and rolebinding to allow the cronjob to have permissions to run the script for getting node information
 - serviceaccount.yaml: the service account for the cronjob with the aws role attached
 - kustomization.yaml: the kustomization file to deploy all the previous files
