@@ -3,3 +3,5 @@ tfplan
 cluster-kubeconfig
 opened_ports.txt
 Makefile.config
+report_puller/bin/*
+!report_puller/bin/.gitkeep

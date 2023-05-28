@@ -21,6 +21,9 @@ help:
 	echo "tf-deploy: Deploy terraform plan"
 	echo "tf-destroy: Destroy terraform plan"
 	echo "kubeconfig: Get kubeconfig file"
+	echo "build-app: Build docker image"
+	echo "push-app: Push docker image to registry"
+	echo "fetch-report: Fetch report from S3"
 
 s3-creation:
 	bash .github/s3_creation.sh
@@ -51,3 +54,7 @@ build-app:
 
 push-app:
 	docker push dcristobal/node-get-open-ports:latest
+
+fetch-report:
+	@cd report_puller && go build -o bin/fetch_report main.go
+	@cd report_puller/bin && ./fetch_report
