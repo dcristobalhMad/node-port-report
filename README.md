@@ -8,14 +8,25 @@ Node1: [22,80,443]
 Node2: [22,443]
 Master1: [22,443]
 
+## Solution
+
+The report should be generated daily and stored in a S3 bucket. I assume that I will need two apps, one to generate the report and another to fetch it.
+
+- To generate the report I have decided to use python and a cronjob in kubernetes to run it every day at 00:00. The report will be stored in a S3 bucket. The python script will check the opened ports in all the nodes and will generate a report, it will parse a whitelist of ports to ignore selected by the user and will push the report to the S3 bucket. Apart from that, the python script will send an email to the user if the script fails.
+
+- To fetch the report I have decided to use a golang app to download the report from the S3 bucket.
+
 ## Requirements
 
 If you want to run the code locally you will need:
 
 - Set the environment variables AWS_DEFAULT_REGION, AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY, MAIL_PASSWORD, MAIL_USER
-- aws credentials configured
+- Aws credentials configured
 - awscli
-- terraform
+- Terraform
+- Python
+- Golang
+- Kubectl
 
 ## Infrastructure
 
@@ -79,6 +90,14 @@ The cronjob will run the script and will push the report to the S3 bucket called
 
 ## Fetch report
 
+To fetch the report you can run the following command:
+
+```bash
+make fetch-report
+```
+
+It will download the report with the current day from the S3 bucket and leave it in report_puller/bin folder
+
 ## Pipelines
 
 The pipelines are configured in .github/workflows folder:
@@ -88,8 +107,9 @@ The pipelines are configured in .github/workflows folder:
 
 ## Improvements
 
-- Add gitops paradigm to deploy the manifests
+- Automate the deployment python script tag image version with another script
+- Variables in cronjob to configure the s3 bucket and the report name dinamically
+- Add gitops paradigm to deploy the manifests and update the image tags
 - Add a helm chart to deploy the application
 - Build a lightweight docker image
 - Add a e2e test in the pipeline raising a kind cluster and running the script
-- Add shellcheck and linters to the pipeline
