@@ -1,0 +1,21 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: get-node-info
+rules:
+  - apiGroups: [""]
+    resources: ["nodes"]
+    verbs: ["get", "watch", "list"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: get-node-info-bind
+subjects:
+  - kind: ServiceAccount
+    name: s3-access
+    namespace: default
+roleRef:
+  kind: ClusterRole
+  name: get-node-info
+  apiGroup: rbac.authorization.k8s.io

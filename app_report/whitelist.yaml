@@ -1,0 +1,4 @@
+whitelist_ports:
+  - 32
+  - 49
+  - 3232

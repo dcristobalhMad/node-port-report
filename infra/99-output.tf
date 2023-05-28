@@ -22,3 +22,8 @@ output "s3_report_bucket" {
   description = "Bucket for reporting"
   value       = aws_s3_bucket.s3_report_bucket.id
 }
+
+output "iam_role_report" {
+  description = "IAM Role for reporting"
+  value       = aws_iam_role.bucket_role.arn
+}

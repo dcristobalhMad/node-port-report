@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: daily-job
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: s3-access
+          containers:
+            - name: diego-container
+              image: dcristobal/node-get-open-ports:0.0.6
+          restartPolicy: OnFailure
