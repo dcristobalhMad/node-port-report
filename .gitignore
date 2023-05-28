@@ -2,3 +2,4 @@
 tfplan
 cluster-kubeconfig
 opened_ports.txt
+Makefile.config

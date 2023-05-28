@@ -93,7 +93,7 @@ except Exception as e:
     # Email configuration
     smtp_server = 'smtp.gmail.com'
     smtp_port = 587
-    sender_email = 'alertsender2023@gmail.com'
+    sender_email = os.environ.get('MAIL_SENDER')
     receiver_email = 'diecristher@gmail.com'
     email_subject = 'Script Execution Failed'
 

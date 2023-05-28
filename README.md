@@ -12,7 +12,7 @@ Master1: [22,443]
 
 If you want to run the code locally you will need:
 
-- Set the environment variables AWS_DEFAULT_REGION, AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
+- Set the environment variables AWS_DEFAULT_REGION, AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY, MAIL_PASSWORD, MAIL_USER
 - aws credentials configured
 - awscli
 - terraform
@@ -75,7 +75,7 @@ In kubernetes folder there are 4 files:
 - serviceaccount.yaml: the service account for the cronjob with the aws role attached
 - kustomization.yaml: the kustomization file to deploy all the previous files
 
-The cronjob will run the script and will push the report to the S3 bucket.
+The cronjob will run the script and will push the report to the S3 bucket called "s3-report-bucket-diego"
 
 ## Fetch report
 
@@ -83,8 +83,8 @@ The cronjob will run the script and will push the report to the S3 bucket.
 
 The pipelines are configured in .github/workflows folder:
 
-- infra.yml: to deploy the terraform infrastructure
-- app-build.yml: to build and to deploy the application
+- infra.yml: to deploy the terraform infrastructure from every push to master branch
+- app-build.yml: to build and to deploy the application from a tag in semver format
 
 ## Improvements
 

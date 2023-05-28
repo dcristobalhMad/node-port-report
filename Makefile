@@ -1,7 +1,11 @@
 SHELL := /bin/bash
 
+include Makefile.config
+
+
 .PHONY: help tf-fmt s3-creation tf-check tf-init tf-plan tf-deploy tf-destroy kubeconfig build-app push-app
 .SILENT: help tf-fmt s3-creation tf-check tf-init tf-plan tf-deploy tf-destroy kubeconfig build-app push-app
+
 
 DOCKER_USER =? dcristobal
 DOCKER_APP_NAME =? node-get-open-ports

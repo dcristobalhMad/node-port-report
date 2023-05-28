@@ -11,6 +11,12 @@ WORKDIR /app
 # Copy the requirements file to the container
 COPY requirements.txt .
 
+# Add secret mail variables
+ARG MAIL_SENDER
+ARG MAIL_PASSWORD
+ENV MAIL_PASSWORD=$MAIL_PASSWORD
+ENV MAIL_SENDER=$MAIL_SENDER
+
 # Install the Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
