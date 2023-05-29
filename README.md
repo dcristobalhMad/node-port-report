@@ -123,6 +123,10 @@ The secrets should be configured in github repository settings with the followin
 - MAIL_SENDER
 - PAT_TAG
 
+## Monitoring
+
+For monitoring my approach would be to create an endpoint inside the python script using the Prometheus python library developing the metric to expose it on port 9099, this would mean that it would be necessary to expose the port and the cronjob with a service inside the kubernetes cluster so Prometheus can do the scrape. To visualize the metrics I would use Grafana and I would create a dashboard but first I would check in Prometheus if the metric is being scraped correctly.
+
 ## Improvements
 
 - Add gitops paradigm to deploy the manifests and update the image tags
